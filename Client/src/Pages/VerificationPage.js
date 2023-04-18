@@ -14,7 +14,7 @@ function VerifyLicense() {
 
   useEffect(() => {
       if(dtFromHmpg.state.envType == 'UAT'){
-          fetch('http://:4500/smplcnsvrftn/generatetoken',{
+          fetch('http://localhost:PORT/smplcnsvrftn/generatetoken',{
             method: 'GET'
           })
           .then(val => val.json())
@@ -64,7 +64,7 @@ function VerifyLicense() {
      promiseResult =   await Promise.all(
     values?.map(async (val) => {
       console.log()
-      await fetch("http://:4500/smplcnsvrftn/getallocation", {
+      await fetch("http://localhost:PORT/smplcnsvrftn/getallocation", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -99,7 +99,7 @@ function VerifyLicense() {
     console.time('.map()')
      promiseResult =   await Promise.all(
     values?.map(async (val) => {
-      await fetch("http://:4500/smplcnsvrftn/getallocationforuat", {
+      await fetch("http://localhost:PORT/smplcnsvrftn/getallocationforuat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
