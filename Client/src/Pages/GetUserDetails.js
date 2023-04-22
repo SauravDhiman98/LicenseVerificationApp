@@ -32,7 +32,7 @@ function getUserdetails(){
 
     useEffect(() => {
         if(dtFromHmpg.state.envType == 'UAT'){
-            fetch('http://smplcnsvrftn/generatetoken',{
+            fetch('http://localhost:4500/smplcnsvrftn/generatetoken',{
               method: 'GET'
             })
             .then(val => val.json())
@@ -64,7 +64,7 @@ function getUserdetails(){
          promiseResult =   await Promise.all(
         values?.map(async (val) => {
           console.log()
-          await fetch("http://smplcnsvrftn/getuserdetails", {
+          await fetch("http://localhost:4500/smplcnsvrftn/getuserdetails", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -88,7 +88,7 @@ function getUserdetails(){
         console.time('.map()')
          promiseResult =   await Promise.all(
         values?.map(async (val) => {
-          await fetch("http://smplcnsvrftn/getuserdetailsforuat", {
+          await fetch("http://localhost:4500/smplcnsvrftn/getuserdetailsforuat", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
