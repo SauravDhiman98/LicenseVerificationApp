@@ -38,6 +38,7 @@ function VerifyLicense() {
   const [values, setValues] = useState([]);
 
   const [getDataFlag, setDataFlag] = useState(false);
+  const [showSpinner, setShowSpinner] = useState(false)
 
   const headersForCSV = [
     { label: "Partner Account", key: "partnerAccount" },
@@ -57,7 +58,7 @@ function VerifyLicense() {
   var promiseResult;
 
   const filterDataOnItemNumber = async () => {
- 
+    setShowSpinner(true)
     if(dtFromHmpg.state.envType == 'SIT'){
     console.timeEnd('for {}')
     console.time('.map()')
@@ -93,6 +94,7 @@ function VerifyLicense() {
         });
     })
     )
+    setShowSpinner(false)
     setDataFlag(true)
   }
   else{
@@ -128,6 +130,7 @@ function VerifyLicense() {
         });
     })
     )
+    setShowSpinner(false)
     setDataFlag(true)
   }
   
@@ -248,22 +251,22 @@ function VerifyLicense() {
       >
         Click Here
       </button>
-      {
-        getDataFlag ? 
-        <button >
-        <CSVLink
-          
-         style={{ textDecoration: "none", visibility: csvData.length == 0 ? "hidden" : "visible"}}
-          data={csvData}
-          headers={headersForCSV}
-        >
-          Download CSV
-        </CSVLink>
-      </button> 
-      :
-      null
-      }
 
+      { showSpinner ? <span class="loader"></span> : getDataFlag ?
+            <button style={{marginTop: "20px"}} >
+            <CSVLink
+              
+             style={{ textDecoration: "none", visibility: csvData.length == 0 ? "hidden" : "visible"}}
+              data={csvData}
+              headers={headersForCSV}
+            >
+              Download CSV
+            </CSVLink>
+          </button> 
+          :
+          null
+            
+            }
       {
         errMsg ? <h5>There are no subscriptions for given SFDC Ids with given item numbers</h5> : null
       }

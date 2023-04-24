@@ -28,15 +28,17 @@ function getUserdetails(){
 
     const [getDataFlag, setDataFlag] = useState(false);
 
+    const [showSpinner, setShowSpinner] = useState(false)
+
     // 
 
     useEffect(() => {
         if(dtFromHmpg.state.envType == 'UAT'){
-            fetch('http://smplcnsvrftn/generatetoken',{
+            fetch('http://localhost:4500/smplcnsvrftn/generatetoken',{
               method: 'GET'
             })
             .then(val => val.json())
-            .then(res => console.log(res))
+            
         }
     },[])
 
@@ -55,7 +57,8 @@ function getUserdetails(){
 
     var promiseResult;
     const filterDataOnItemNumber = async () => {
- 
+
+        setShowSpinner(true)
         if(dtFromHmpg.state.envType == 'SIT'){
         console.timeEnd('for {}')
         console.time('.map()')
@@ -80,7 +83,9 @@ function getUserdetails(){
             );
         })
         )
+        setShowSpinner(false)
         setDataFlag(true)
+
       }
       else{
         console.time('.map()')
@@ -103,6 +108,7 @@ function getUserdetails(){
             });
         })
         )
+        setShowSpinner(false)
         setDataFlag(true)
       }
       
@@ -219,9 +225,9 @@ function getUserdetails(){
           >
             Click Here
           </button>
-          {
-            getDataFlag ? 
-            <button >
+          
+            { showSpinner ? <span class="loader"></span> : getDataFlag ?
+            <button style={{marginTop: "20px"}} >
             <CSVLink
               
              style={{ textDecoration: "none", visibility: csvData.length == 0 ? "hidden" : "visible"}}
@@ -233,7 +239,9 @@ function getUserdetails(){
           </button> 
           :
           null
-          }
+            
+            }
+          
     
           {
             errMsg ? <h5>There are no subscriptions for given SFDC Ids with given item numbers</h5> : null

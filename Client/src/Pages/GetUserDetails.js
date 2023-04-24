@@ -27,6 +27,7 @@ function getUserdetails(){
     const [values, setValues] = useState([]);
 
     const [getDataFlag, setDataFlag] = useState(false);
+    const [showSpinner, setShowSpinner] = useState(false)
 
     // 
 
@@ -57,7 +58,7 @@ function getUserdetails(){
 
     var promiseResult;
     const filterDataOnItemNumber = async () => {
- 
+      setShowSpinner(true)
         if(dtFromHmpg.state.envType == 'SIT'){
         console.timeEnd('for {}')
         console.time('.map()')
@@ -82,6 +83,7 @@ function getUserdetails(){
             );
         })
         )
+        setShowSpinner(false)
         setDataFlag(true)
       }
       else{
@@ -105,6 +107,7 @@ function getUserdetails(){
             });
         })
         )
+        setShowSpinner(false)
         setDataFlag(true)
       }
       
@@ -222,9 +225,9 @@ function getUserdetails(){
           >
             Click Here
           </button>
-          {
-            getDataFlag ? 
-            <button >
+         
+          { showSpinner ? <span class="loader"></span> : getDataFlag ?
+            <button style={{marginTop: "20px"}} >
             <CSVLink
               
              style={{ textDecoration: "none", visibility: csvData.length == 0 ? "hidden" : "visible"}}
@@ -236,8 +239,8 @@ function getUserdetails(){
           </button> 
           :
           null
-          }
-    
+            
+            }
           {
             errMsg ? <h5>There are no subscriptions for given SFDC Ids with given item numbers</h5> : null
           }
