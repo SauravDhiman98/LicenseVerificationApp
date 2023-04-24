@@ -32,7 +32,7 @@ function getUserdetails(){
 
     useEffect(() => {
         if(dtFromHmpg.state.envType == 'UAT'){
-            fetch('http://localhost:4500/smplcnsvrftn/generatetoken',{
+            fetch('http://smplcnsvrftn/generatetoken',{
               method: 'GET'
             })
             .then(val => val.json())
