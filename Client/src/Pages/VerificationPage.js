@@ -14,7 +14,7 @@ function VerifyLicense() {
 
   useEffect(() => {
       if(dtFromHmpg.state.envType == 'UAT'){
-          fetch('https://smplcnsvrftn/generatetoken',{
+          fetch('https://localhost:4500/smplcnsvrftn/generatetoken',{
             method: 'GET'
           })
           .then(val => val.json())
