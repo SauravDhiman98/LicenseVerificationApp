@@ -30,6 +30,8 @@ function getUserdetails(){
 
     const [showSpinner, setShowSpinner] = useState(false)
 
+    const [tokenSpinner, setTokenSpiiner] = useState(true) 
+
     // 
 
     useEffect(() => {
@@ -37,8 +39,10 @@ function getUserdetails(){
             fetch('http://localhost:4500/smplcnsvrftn/generatetoken',{
               method: 'GET'
             })
-            .then(val => val.json())
-            
+            .then(res => res.json())
+            .then(val => {
+              setTokenSpiiner(false)
+            })    
         }
     },[])
 
@@ -185,8 +189,14 @@ function getUserdetails(){
       };
     
     
-      return (
-        <OuterContainer>
+      return (<>
+          {
+            dtFromHmpg.state.envType == "UAT" ? tokenSpinner  ?
+            <OuterContainer1>
+              <span className="tokenLoader"></span>
+            </OuterContainer1>  
+            : 
+            <OuterContainer>
           <h2>Environment: {dtFromHmpg.state.envType}</h2>
           File Uploader
           <input
@@ -246,7 +256,71 @@ function getUserdetails(){
           {
             errMsg ? <h5>There are no subscriptions for given SFDC Ids with given item numbers</h5> : null
           }
-        </OuterContainer>
+          </OuterContainer>
+          :
+          <OuterContainer>
+          <h2>Environment: {dtFromHmpg.state.envType}</h2>
+          File Uploader
+          <input
+            type="file"
+            name="file"
+            onChange={changeHandler}
+            onClick={() => setDataFlag(false)}
+            accept=".csv"
+            style={{ display: "block", margin: "10px auto" }}
+          />
+          <br />
+          <br />
+          <table>
+            <thead>
+              <tr>
+                {tableRows.map((rows, index) => {
+                  return <th key={index}>{rows}</th>;
+                })}
+              </tr>
+            </thead>
+            <tbody>
+              {values.map((value, index) => {
+                return (
+                  <tr key={index}>
+                    {value.map((val, i) => {
+                      return <td key={i}>{val}</td>;
+                    })}
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+          <button
+            disabled={values.length == 0}
+            onClick={() => filterDataOnItemNumber()}
+          >
+            Click Here
+          </button>
+          
+            { showSpinner ? <span class="loader"></span> : getDataFlag ?
+            <button style={{marginTop: "20px"}} >
+            <CSVLink
+              
+             style={{ textDecoration: "none", visibility: csvData.length == 0 ? "hidden" : "visible"}}
+              data={csvData}
+              headers={headersForCSV}
+            >
+              Download CSV
+            </CSVLink>
+          </button> 
+          :
+          null
+            
+            }
+          
+    
+          {
+            errMsg ? <h5>There are no subscriptions for given SFDC Ids with given item numbers</h5> : null
+          }
+          </OuterContainer>
+        }
+        </>
       );
 } 
 
@@ -258,3 +332,13 @@ const OuterContainer = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
+const OuterContainer1 = styled.div`
+background-color: white;
+width: 100vw;
+height: 100vh;
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+`

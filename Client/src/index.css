@@ -32,6 +32,18 @@ table, th, td, tr {
   transform: translateZ(0);
   animation: mltShdSpin 1.7s infinite ease, round 1.7s infinite ease;
 }
+.tokenLoader {
+  color: black;
+  font-size: 80px;
+  text-indent: -9999em;
+  overflow: hidden;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  position: relative;
+  transform: translateZ(0);
+  animation: mltShdSpin 1.7s infinite ease, round 1.7s infinite ease;
+}
 
 @keyframes mltShdSpin {
   0% {

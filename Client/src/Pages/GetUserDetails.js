@@ -28,6 +28,7 @@ function getUserdetails(){
 
     const [getDataFlag, setDataFlag] = useState(false);
     const [showSpinner, setShowSpinner] = useState(false)
+    const [tokenSpinner, setTokenSpiiner] = useState(true) 
 
     // 
 
@@ -37,7 +38,9 @@ function getUserdetails(){
               method: 'GET'
             })
             .then(val => val.json())
-            .then(res => console.log(res))
+            .then(res => {
+              setTokenSpiiner(false)
+            })
         }
     },[])
 
@@ -185,67 +188,139 @@ function getUserdetails(){
       };
     
     
-      return (
-        <OuterContainer>
-          <h2>Environment: {dtFromHmpg.state.envType}</h2>
-          File Uploader
-          <input
-            type="file"
-            name="file"
-            onChange={changeHandler}
-            onClick={() => setDataFlag(false)}
-            accept=".csv"
-            style={{ display: "block", margin: "10px auto" }}
-          />
-          <br />
-          <br />
-          <table>
-            <thead>
-              <tr>
-                {tableRows.map((rows, index) => {
-                  return <th key={index}>{rows}</th>;
-                })}
-              </tr>
-            </thead>
-            <tbody>
-              {values.map((value, index) => {
-                return (
-                  <tr key={index}>
-                    {value.map((val, i) => {
-                      return <td key={i}>{val}</td>;
-                    })}
-                  </tr>
-                );
+      return(<>
+        {
+          dtFromHmpg.state.envType == "UAT" ? tokenSpinner  ?
+          <OuterContainer1>
+            <span className="tokenLoader"></span>
+          </OuterContainer1>  
+          : 
+          <OuterContainer>
+        <h2>Environment: {dtFromHmpg.state.envType}</h2>
+        File Uploader
+        <input
+          type="file"
+          name="file"
+          onChange={changeHandler}
+          onClick={() => setDataFlag(false)}
+          accept=".csv"
+          style={{ display: "block", margin: "10px auto" }}
+        />
+        <br />
+        <br />
+        <table>
+          <thead>
+            <tr>
+              {tableRows.map((rows, index) => {
+                return <th key={index}>{rows}</th>;
               })}
-            </tbody>
-          </table>
-          <button
-            disabled={values.length == 0}
-            onClick={() => filterDataOnItemNumber()}
-          >
-            Click Here
-          </button>
-         
+            </tr>
+          </thead>
+          <tbody>
+            {values.map((value, index) => {
+              return (
+                <tr key={index}>
+                  {value.map((val, i) => {
+                    return <td key={i}>{val}</td>;
+                  })}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+        <button
+          disabled={values.length == 0}
+          onClick={() => filterDataOnItemNumber()}
+        >
+          Click Here
+        </button>
+        
           { showSpinner ? <span class="loader"></span> : getDataFlag ?
-            <button style={{marginTop: "20px"}} >
-            <CSVLink
-              
-             style={{ textDecoration: "none", visibility: csvData.length == 0 ? "hidden" : "visible"}}
-              data={csvData}
-              headers={headersForCSV}
-            >
-              Download CSV
-            </CSVLink>
-          </button> 
-          :
-          null
+          <button style={{marginTop: "20px"}} >
+          <CSVLink
             
-            }
-          {
-            errMsg ? <h5>There are no subscriptions for given SFDC Ids with given item numbers</h5> : null
+           style={{ textDecoration: "none", visibility: csvData.length == 0 ? "hidden" : "visible"}}
+            data={csvData}
+            headers={headersForCSV}
+          >
+            Download CSV
+          </CSVLink>
+        </button> 
+        :
+        null
+          
           }
+        
+  
+        {
+          errMsg ? <h5>There are no subscriptions for given SFDC Ids with given item numbers</h5> : null
+        }
         </OuterContainer>
-      );
+        :
+        <OuterContainer>
+        <h2>Environment: {dtFromHmpg.state.envType}</h2>
+        File Uploader
+        <input
+          type="file"
+          name="file"
+          onChange={changeHandler}
+          onClick={() => setDataFlag(false)}
+          accept=".csv"
+          style={{ display: "block", margin: "10px auto" }}
+        />
+        <br />
+        <br />
+        <table>
+          <thead>
+            <tr>
+              {tableRows.map((rows, index) => {
+                return <th key={index}>{rows}</th>;
+              })}
+            </tr>
+          </thead>
+          <tbody>
+            {values.map((value, index) => {
+              return (
+                <tr key={index}>
+                  {value.map((val, i) => {
+                    return <td key={i}>{val}</td>;
+                  })}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+        <button
+          disabled={values.length == 0}
+          onClick={() => filterDataOnItemNumber()}
+        >
+          Click Here
+        </button>
+        
+          { showSpinner ? <span class="loader"></span> : getDataFlag ?
+          <button style={{marginTop: "20px"}} >
+          <CSVLink
+            
+           style={{ textDecoration: "none", visibility: csvData.length == 0 ? "hidden" : "visible"}}
+            data={csvData}
+            headers={headersForCSV}
+          >
+            Download CSV
+          </CSVLink>
+        </button> 
+        :
+        null
+          
+          }
+        
+  
+        {
+          errMsg ? <h5>There are no subscriptions for given SFDC Ids with given item numbers</h5> : null
+        }
+        </OuterContainer>
+      }
+      </>
+    );
 } 
 
 export default getUserdetails
@@ -256,3 +331,12 @@ const OuterContainer = styled.div`
   justify-content: center;
   align-items: center;
 `;
+const OuterContainer1 = styled.div`
+background-color: white;
+width: 100vw;
+height: 100vh;
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+`

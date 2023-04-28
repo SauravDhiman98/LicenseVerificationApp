@@ -1,0 +1,7 @@
+.CloseIcon{
+    color: black;
+    cursor: pointer;
+}
+.CloseIcon:active{
+    scale: .8;
+}
