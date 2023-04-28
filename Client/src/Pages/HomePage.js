@@ -33,7 +33,7 @@ const HomePage = () => {
       if(val == null){
         setTimeout(() => {
           setPopup(false)
-        },3000) 
+        },7000) 
         localStorage.setItem("showPopUp", false)
       }
       else{
