@@ -20,10 +20,6 @@ app.use(
 
 app.use("/smplcnsvrftn", GetAllocation, GetAllocationForUAT);
 
-app.listen(process.env.PORT || 4500, () => {
-  console.log("You are live now....");
-});
-
 if(process.env.NODE_ENV == 'production'){
   app.use(express.static("Client/build"))
   const path = require("path")
@@ -42,4 +38,6 @@ if(process.env.NODE_ENV == 'production'){
 //   .catch((err) => console.log(err));
 
 
-
+app.listen(process.env.PORT || 4500, () => {
+  console.log("You are live now....");
+});
