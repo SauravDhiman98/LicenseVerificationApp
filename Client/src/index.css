@@ -14,8 +14,16 @@ code {
     monospace;
 }
 
-table, th, td, tr {
-  border: solid 1px black;
+
+
+th{
+  background-color: #262626;
+  color: white;
+}
+
+tr{
+  background-color: #545454;
+  color: white;
 }
 
 

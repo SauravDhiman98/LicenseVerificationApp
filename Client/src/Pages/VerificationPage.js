@@ -4,6 +4,7 @@ import { CSVLink } from "react-csv";
 import "../index.css";
 import styled from "styled-components";
 import { useLoaderData, useLocation } from "react-router-dom";
+import { border } from "@mui/system";
 
 const allowedExtensions = ["csv"];
 
@@ -222,8 +223,7 @@ function VerifyLicense() {
       </OuterContainer1>  
       : 
       <OuterContainer>
-    <h2>Environment: {dtFromHmpg.state.envType}</h2>
-    File Uploader
+    <TextContainer>Environment: {dtFromHmpg.state.envType}</TextContainer>
     <input
       type="file"
       name="file"
@@ -254,15 +254,15 @@ function VerifyLicense() {
         })}
       </tbody>
     </table>
-    <button
+    <Btn
       disabled={values.length == 0}
       onClick={() => filterDataOnItemNumber()}
     >
-      Click Here
-    </button>
+      Generate CSV File
+    </Btn>
     
       { showSpinner ? <span class="loader"></span> : getDataFlag ?
-      <button style={{marginTop: "20px"}} >
+      <Btn style={{marginTop: "20px"}} >
       <CSVLink
         
        style={{ textDecoration: "none", visibility: csvData.length == 0 ? "hidden" : "visible"}}
@@ -271,7 +271,7 @@ function VerifyLicense() {
       >
         Download CSV
       </CSVLink>
-    </button> 
+    </Btn> 
     :
     null
       
@@ -284,7 +284,7 @@ function VerifyLicense() {
     </OuterContainer>
     :
     <OuterContainer>
-    <h2>Environment: {dtFromHmpg.state.envType}</h2>
+    <TextContainer>Environment: {dtFromHmpg.state.envType}</TextContainer>
     File Uploader
     <input
       type="file"
@@ -316,15 +316,15 @@ function VerifyLicense() {
         })}
       </tbody>
     </table>
-    <button
+    <Btn
       disabled={values.length == 0}
       onClick={() => filterDataOnItemNumber()}
     >
-      Click Here
-    </button>
+      Generate CSV File
+    </Btn>
     
       { showSpinner ? <span class="loader"></span> : getDataFlag ?
-      <button style={{marginTop: "20px"}} >
+      <Btn style={{marginTop: "20px"}} >
       <CSVLink
         
        style={{ textDecoration: "none", visibility: csvData.length == 0 ? "hidden" : "visible"}}
@@ -333,7 +333,7 @@ function VerifyLicense() {
       >
         Download CSV
       </CSVLink>
-    </button> 
+    </Btn> 
     :
     null
       
@@ -366,4 +366,30 @@ height: 100vh;
  flex-direction: column;
  justify-content: center;
  align-items: center;
+`
+
+const TextContainer = styled.h2`
+ width: 100vw;
+ height: 50px;
+ background-color: #262626;
+ color: white;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+`
+
+const Btn = styled.button`
+ min-width: 100px;
+ height: 30px;
+ cursor: pointer;
+ margin: 5px;
+ background-color: rgba(0,0,0,.9);
+ border-radius: 4px;
+ border: none;
+ color: white;
+ font-weight: 600;
+:active{
+  background-color: rgba(0,0,0,.6);
+  transform: translateY(2px);
+}
 `
