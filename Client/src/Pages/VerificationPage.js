@@ -15,7 +15,7 @@ function VerifyLicense() {
 
   useEffect(() => {
       if(dtFromHmpg.state.envType == 'UAT'){
-          fetch('/smplcnsvrftn/generatetoken',{
+          fetch('http://localhost:4500/smplcnsvrftn/generatetoken',{
             method: 'GET'
           })
           .then(val => val.json())
@@ -69,7 +69,7 @@ function VerifyLicense() {
      promiseResult =   await Promise.all(
     values?.map(async (val) => {
       console.log()
-      await fetch("/smplcnsvrftn/getallocation", {
+      await fetch("http://localhost:4500/smplcnsvrftn/getallocation", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -105,7 +105,7 @@ function VerifyLicense() {
     console.time('.map()')
      promiseResult =   await Promise.all(
     values?.map(async (val) => {
-      await fetch("/smplcnsvrftn/getallocationforuat", {
+      await fetch("http://localhost:4500/smplcnsvrftn/getallocationforuat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -369,6 +369,7 @@ height: 100vh;
 `
 
 const TextContainer = styled.h2`
+margin-top: 0%;
  width: 100vw;
  height: 50px;
  background-color: #262626;

@@ -326,6 +326,7 @@ function getUserdetails(){
 export default getUserdetails
 
 const OuterContainer = styled.div`
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -341,6 +342,7 @@ height: 100vh;
  align-items: center;
 `
 const TextContainer = styled.h2`
+margin-top: 0%;
  width: 100vw;
  height: 50px;
  background-color: #262626;

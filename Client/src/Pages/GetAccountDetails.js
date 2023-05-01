@@ -344,6 +344,7 @@ height: 100vh;
 `
 
 const TextContainer = styled.h2`
+ margin-top: 0%;
  width: 100vw;
  height: 50px;
  background-color: #262626;
