@@ -44,6 +44,7 @@ function VerifyLicense() {
   const [getDataFlag, setDataFlag] = useState(false);
   const [showSpinner, setShowSpinner] = useState(false)
   const [tokenSpinner, setTokenSpiiner] = useState(true) 
+  const [showAPIBtn, setAPIBtn] = useState(true)
 
   const headersForCSV = [
     { label: "Partner Account", key: "partnerAccount" },
@@ -64,6 +65,7 @@ function VerifyLicense() {
 
   const filterDataOnItemNumber = async () => {
     setShowSpinner(true)
+    setAPIBtn(false)
     if(dtFromHmpg.state.envType == 'SIT'){
     console.timeEnd('for {}')
     console.time('.map()')
@@ -256,7 +258,7 @@ function VerifyLicense() {
       </tbody>
     </table>
     <Btn
-      disabled={values.length == 0}
+      disabled={values.length == 0 && showAPIBtn}
       onClick={() => filterDataOnItemNumber()}
     >
       Generate CSV File
@@ -318,7 +320,7 @@ function VerifyLicense() {
       </tbody>
     </table>
     <Btn
-      disabled={values.length == 0}
+      disabled={values.length == 0 && showAPIBtn}
       onClick={() => filterDataOnItemNumber()}
     >
       Generate CSV File

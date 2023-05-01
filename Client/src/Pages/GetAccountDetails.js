@@ -31,7 +31,7 @@ function getUserdetails(){
     const [showSpinner, setShowSpinner] = useState(false)
 
     const [tokenSpinner, setTokenSpiiner] = useState(true) 
-
+    const [showAPIBtn, setAPIBtn] = useState(true)
     // 
 
     useEffect(() => {
@@ -63,6 +63,7 @@ function getUserdetails(){
     const filterDataOnItemNumber = async () => {
 
         setShowSpinner(true)
+        setAPIBtn(false)
         if(dtFromHmpg.state.envType == 'SIT'){
         console.timeEnd('for {}')
         console.time('.map()')
@@ -230,7 +231,7 @@ function getUserdetails(){
             </tbody>
           </table>
           <Btn
-            disabled={values.length == 0}
+            disabled={values.length == 0 && showAPIBtn}
             onClick={() => filterDataOnItemNumber()}
           >
             Generate CSV File
@@ -292,7 +293,7 @@ function getUserdetails(){
             </tbody>
           </table>
           <Btn
-            disabled={values.length == 0}
+            disabled={values.length == 0 && showAPIBtn}
             onClick={() => filterDataOnItemNumber()}
           >
             Generate CSV File
