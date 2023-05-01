@@ -5,6 +5,7 @@ import "../index.css";
 import styled from "styled-components";
 import { useLoaderData, useLocation } from "react-router-dom";
 import { border } from "@mui/system";
+import Navbar from "../Components/Navbar";
 
 const allowedExtensions = ["csv"];
 
@@ -223,7 +224,7 @@ function VerifyLicense() {
       </OuterContainer1>  
       : 
       <OuterContainer>
-    <TextContainer>Environment: {dtFromHmpg.state.envType}</TextContainer>
+    <Navbar envType={dtFromHmpg.state.envType} apiName={"GetAllocation"}/>
     <input
       type="file"
       name="file"
@@ -284,7 +285,7 @@ function VerifyLicense() {
     </OuterContainer>
     :
     <OuterContainer>
-    <TextContainer>Environment: {dtFromHmpg.state.envType}</TextContainer>
+    <Navbar envType={dtFromHmpg.state.envType} apiName={"GetAllocation"}/>
     File Uploader
     <input
       type="file"

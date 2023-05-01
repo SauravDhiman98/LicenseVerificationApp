@@ -3,7 +3,8 @@ import { useLocation } from "react-router-dom";
 import { CSVLink } from "react-csv";
 import "../index.css";
 import styled from "styled-components";
-import Papa from "papaparse"; 
+import Papa from "papaparse";
+import Navbar from "../Components/Navbar"; 
 
 
 function getUserdetails(){
@@ -196,7 +197,7 @@ function getUserdetails(){
           </OuterContainer1>  
           : 
           <OuterContainer>
-        <TextContainer>Environment: {dtFromHmpg.state.envType}</TextContainer>
+            <Navbar envType={dtFromHmpg.state.envType}/>
         File Uploader
         <input
           type="file"
@@ -258,7 +259,7 @@ function getUserdetails(){
         </OuterContainer>
         :
         <OuterContainer>
-        <TextContainer>Environment: {dtFromHmpg.state.envType}</TextContainer>
+       <Navbar envType={dtFromHmpg.state.envType} apiName={"GetUserDetail"}/>
         File Uploader
         <input
           type="file"
