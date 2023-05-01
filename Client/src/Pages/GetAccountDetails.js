@@ -240,7 +240,7 @@ function getUserdetails(){
             <Btn style={{marginTop: "20px"}} >
             <CSVLink
               
-             style={{ textDecoration: "none", visibility: csvData.length == 0 ? "hidden" : "visible"}}
+             style={{ color:"white", textDecoration: "none", visibility: csvData.length == 0 ? "hidden" : "visible"}}
               data={csvData}
               headers={headersForCSV}
             >
@@ -302,7 +302,7 @@ function getUserdetails(){
             <Btn style={{marginTop: "20px"}} >
             <CSVLink
               
-             style={{ textDecoration: "none", visibility: csvData.length == 0 ? "hidden" : "visible"}}
+             style={{color:"white", textDecoration: "none", visibility: csvData.length == 0 ? "hidden" : "visible"}}
               data={csvData}
               headers={headersForCSV}
             >

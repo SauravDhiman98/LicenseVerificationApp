@@ -15,7 +15,7 @@ function VerifyLicense() {
 
   useEffect(() => {
       if(dtFromHmpg.state.envType == 'UAT'){
-          fetch('http://localhost:4500/smplcnsvrftn/generatetoken',{
+          fetch('/smplcnsvrftn/generatetoken',{
             method: 'GET'
           })
           .then(val => val.json())
@@ -69,7 +69,7 @@ function VerifyLicense() {
      promiseResult =   await Promise.all(
     values?.map(async (val) => {
       console.log()
-      await fetch("http://localhost:4500/smplcnsvrftn/getallocation", {
+      await fetch("/smplcnsvrftn/getallocation", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -105,7 +105,7 @@ function VerifyLicense() {
     console.time('.map()')
      promiseResult =   await Promise.all(
     values?.map(async (val) => {
-      await fetch("http://localhost:4500/smplcnsvrftn/getallocationforuat", {
+      await fetch("/smplcnsvrftn/getallocationforuat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -265,7 +265,7 @@ function VerifyLicense() {
       <Btn style={{marginTop: "20px"}} >
       <CSVLink
         
-       style={{ textDecoration: "none", visibility: csvData.length == 0 ? "hidden" : "visible"}}
+       style={{ color:"white", textDecoration: "none", visibility: csvData.length == 0 ? "hidden" : "visible"}}
         data={csvData}
         headers={headersForCSV}
       >
@@ -327,7 +327,7 @@ function VerifyLicense() {
       <Btn style={{marginTop: "20px"}} >
       <CSVLink
         
-       style={{ textDecoration: "none", visibility: csvData.length == 0 ? "hidden" : "visible"}}
+       style={{ color:"white", textDecoration: "none", visibility: csvData.length == 0 ? "hidden" : "visible"}}
         data={csvData}
         headers={headersForCSV}
       >
