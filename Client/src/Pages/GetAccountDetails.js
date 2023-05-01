@@ -293,7 +293,7 @@ function getUserdetails(){
             </tbody>
           </table>
           <Btn
-            disabled={values.length == 0 && showAPIBtn}
+            disabled={showAPIBtn}
             onClick={() => filterDataOnItemNumber()}
           >
             Generate CSV File
